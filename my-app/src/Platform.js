@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
-import Genre from './Genre';
+import { Link } from 'react-router-dom';
 
-function Platform() {
+const Platform = () => {
    const [buttonClick, setClick] = useState(false) 
    const Click = () => {
         setClick(!buttonClick);
    };
 
    return (
-    <Router>
         <div>
             <h1>
                 Choose your Platform
@@ -41,10 +39,7 @@ function Platform() {
                 </button>
             </Link>
 
-            <Route path="/genre" exact component = {Genre}/>
-
         </div>
-    </Router>
    );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Genre() {
+const Genre = () => {
    const [buttonClick, setClick] = useState(false) 
    const Click = () => {
         setClick(!buttonClick);
