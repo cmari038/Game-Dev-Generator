@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { setPlatform } from './DjangoConnect';
 
 const Platform = () => {
    const [buttonClick, setClick] = useState(false) 
@@ -13,23 +14,23 @@ const Platform = () => {
                 Choose your Platform
             </h1>
             
-            <button onClick={Click}>
+            <button onClick={setPlatform("Playstation")}>
                 Playstation
             </button>
 
-            <button onClick={Click}>
+            <button onClick={setPlatform("PC")}>
                 PC
             </button>
 
-            <button onClick={Click}>
+            <button onClick={setPlatform("Xbox")}>
                 Xbox
             </button>
 
-            <button onClick={Click}>
+            <button onClick={setPlatform("Nintendo Switch")}>
                 Nintendo Switch
             </button>
 
-            <button onClick={Click}>
+            <button onClick={setPlatform("Mobile")}>
                 Mobile
             </button>
 
@@ -38,7 +39,6 @@ const Platform = () => {
                     Submit
                 </button>
             </Link>
-
         </div>
    );
 };

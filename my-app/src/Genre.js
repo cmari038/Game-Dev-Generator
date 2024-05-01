@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { setGenre } from './DjangoConnect';
 
 const Genre = () => {
    const [buttonClick, setClick] = useState(false) 
@@ -9,63 +10,67 @@ const Genre = () => {
    return (
         <div>
             <h1>Choose your Genre</h1>
-             <button onClick={Click}>
+             <button onClick={setGenre("Indie")}>
                         Indie
                     </button>
 
-                     <button onClick={Click}>
+                     <button onClick={setGenre("Fighter")}>
                         Fighter
                     </button>
 
-                     <button onClick={Click}>
+                     <button onClick={setGenre("FPS")}>
                         FPS
                     </button>
 
-                     <button onClick={Click}>
+                     <button onClick={setGenre("Battle Royale")}>
                         Battle Royale
                     </button>
 
-                     <button onClick={Click}>
+                     <button onClick={setGenre("RPG")}>
                         RPG
                     </button>
 
-                     <button onClick={Click}>
+                     <button onClick={setGenre("Survival Horror")}>
                         Survival Horror
                     </button>
 
-                     <button onClick={Click}>
+                     <button onClick={setGenre("Metroidvania")}>
                         Metroidvania
                     </button>
 
-                     <button onClick={Click}>
-                        Battle Royale
-                    </button>
-
-                     <button onClick={Click}>
+                     <button onClick={setGenre("Extraction")}>
                         Extraction
                     </button>
 
-                     <button onClick={Click}>
+                     <button onClick={setGenre("Soulslike")}>
                        Soulslike
                     </button>
 
-                     <button onClick={Click}>
+                    <button onClick={setGenre("Roguelike")}>
+                        Roguelike
+                    </button>
+
+                     <button onClick={setGenre("Sports")}>
                         Sports
                     </button>
 
-                     <button onClick={Click}>
+                    <button onClick={setGenre("MMORPG")}>
+                        MMORPG
+                    </button>
+
+                     <button onClick={setGenre("Racing")}>
                         Racing
                     </button>
 
-                     <button onClick={Click}>
-                        VR
+                     <button onClick={setGenre("VR/AR")}>
+                        VR/AR
                     </button>
 
-                     <button onClick={Click}>
+                     <button onClick={setGenre("Platformer")}>
                         Platformer
                     </button>
 
-                     <button onClick={Click}>
+                     <button onClick={setGenre("Free-to-Play")}>
                         Free-to-Play
                     </button>
         </div> 
