@@ -3,13 +3,13 @@ import axios from 'axios';
 const backendURL = "http://127.0.0.1:8000/"
 
 const jsonData = {
-    platform: [],
+    //platform: [],
     Genres: []
 };
 
-export function setPlatform(platform) {
+/*export function setPlatform(platform) {
     jsonData["platform"].push(platform);
-}; 
+}; */
 
 export function setGenre(genre) {
     jsonData["Genres"].push(genre);

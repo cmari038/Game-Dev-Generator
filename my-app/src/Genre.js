@@ -70,8 +70,16 @@ const Genre = () => {
                         Platformer
                     </button>
 
+                    <button onClick={setGenre("Puzzle")}>
+                        Puzzle
+                    </button>
+
                      <button onClick={setGenre("Free-to-Play")}>
                         Free-to-Play
+                    </button>
+
+                    <button onClick={Click}>
+                        Submit
                     </button>
         </div> 
     );

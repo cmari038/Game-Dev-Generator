@@ -16,6 +16,6 @@ model = genai.GenerativeModel(model_name="gemini-pro")
 
 # Query the Model
 response = model.generate_content(
-    "Answer this question in a JSON format: What video games should I play?")
+    "Give me an idea for a game that is a roguelike.")
 
 print(response.text)
