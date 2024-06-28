@@ -4,6 +4,8 @@ import './App.css';
 import Genre from './Genre';
 import HomePage from './HomePage';
 import Platform from './Platform';
+//import { Response } from './Response';
+//  <Route path="/response" element = {<Response/>}/>
 
 function App() {
   return (

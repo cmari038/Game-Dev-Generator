@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { setPlatform } from './DjangoConnect';
 
@@ -43,4 +43,4 @@ const Platform = () => {
    );
 };
 
-export default Platform;
+export default Platform; */
