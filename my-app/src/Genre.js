@@ -11,8 +11,10 @@ const Genre = () => {
  const [genreList, addGenre] = useState([]);
  
  const setGenre = (genre) => {
-    addGenre([...genreList, genre]);
-    console.log('Added genre to list');
+    if(!genreList.includes(genre)) {
+        addGenre([...genreList, genre]);
+        console.log('Added genre to list'); 
+    }
  };
 
    return (
@@ -97,6 +99,10 @@ const Genre = () => {
 
                      <button onClick={() => setGenre("Soulslike")}>
                        Soulslike
+                    </button>
+
+                    <button onClick={() => setGenre("Sandbox")}>
+                       Sandbox
                     </button>
 
                     <button onClick={() => setGenre("Roguelike")}>

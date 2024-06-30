@@ -23,7 +23,7 @@ def generateGame(genreList):
 
     if len(genreList) == 0:
         response = model.generate_content(
-            "Give me 2 unique ideas for games, including a detailed description of the game's title, setting, lore, story, characters, enemies, levels, bosses, equipment, gameplay, and unique features. Add an END on its own line to indicate the end of a game idea")
+            "Give me a unique idea for a game, including a long and detailed description of the game's title, setting, lore, story, characters, enemies, levels, bosses, abilities, equipment, gameplay features, and unique mechanics. Add an END on its own line to indicate the end of a game idea")
         # print(response.text)
 
     else:
@@ -33,17 +33,18 @@ def generateGame(genreList):
 
         # Query the Model
         response = model.generate_content(
-            f"Give me a unique idea for a game, including a detailed description of the game's title, setting, lore, story, characters, enemies, levels, bosses, gameplay, equipment, and unique features for each of the following genres:{genreString}. Add an END on its own line to indicate the end of a game idea")
+            f"Give me a unique idea for a game, including a long and detailed description of the game's title, setting, lore, story, characters, enemies, levels, bosses, gameplay features, abilities, equipment, and unique mechanics for each of the following genres:{genreString}. Add an END on its own line to indicate the end of a game idea")
 
         # print(response.text)
 
     return response.text
 
 
-genreList = ["immersive sim"]
+genreList = []
 
 output = generateGame(genreList)
 print(output)
+
 
 game = ""
 games = []

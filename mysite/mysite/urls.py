@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Gemini import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # path("genre/", views.getGenre, name="getGenre"),
+    path("gameIdea/", views.getGameIdea, name="getGameIdea"),
+    # path("sendGame/", views.sendGameIdea, name="sendGameIdea"),
 ]

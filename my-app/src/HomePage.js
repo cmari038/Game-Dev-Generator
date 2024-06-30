@@ -10,7 +10,7 @@ const HomePage = () => {
          
             <div>
                 <h1>Welcome to Game Recommendations.</h1>
-                <p>This website uses Google AI to creates new ideas for games that developers can design </p>
+                <p>This website uses Google's Gemini AI to creates new ideas for games that developers can design </p>
 
                 <Link to= "/genre">
                     <button>Games To Make</button>
