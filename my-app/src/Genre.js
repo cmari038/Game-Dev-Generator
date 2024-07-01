@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { sendData } from './DjangoConnect';
 
 const Genre = () => {
    /*const [buttonClick, setClick] = useState(false) 
@@ -137,14 +135,17 @@ const Genre = () => {
                         Puzzle
                     </button>
 
-                    <Link to= "/response">
-                        <button onClick={sendData(genreList)}>
-                            Generate a new Game Idea
-                        </button>
-                    </Link>
+                    <a href="http://127.0.0.1:8000/gameIdea/"> Generate a new Game Idea</a>
         </div> 
     );
 
    };
 
    export default Genre;
+
+   /*
+   <Link to= "/response">
+   <button onClick={sendData(genreList)}>
+       Generate a new Game Idea
+   </button>
+</Link> */

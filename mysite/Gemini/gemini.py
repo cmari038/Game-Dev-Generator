@@ -33,19 +33,19 @@ def generateGame(genreList):
 
         # Query the Model
         response = model.generate_content(
-            f"Give me a unique idea for a game, including a long and detailed description of the game's title, setting, lore, story, characters, enemies, levels, bosses, gameplay features, abilities, equipment, and unique mechanics for each of the following genres:{genreString}. Add an END on its own line to indicate the end of a game idea")
+            f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique mechanics. Add an END on its own line to indicate the end of a game idea")
 
         # print(response.text)
 
     return response.text
 
 
-genreList = []
+genreList = ["Platformer"]
 
 output = generateGame(genreList)
 print(output)
 
-
+"""
 game = ""
 games = []
 for word in output.split():
@@ -53,7 +53,7 @@ for word in output.split():
         games.append(game)
         game = ""
     else:
-        game += word
+        game += word 
         game += " "
 
 

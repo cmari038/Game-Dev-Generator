@@ -39,12 +39,13 @@ def generateGame(genreList):
 
         # Query the Model
         response = model.generate_content(
-            f"Give me a unique idea for a game, including a long and detailed description of the game's title, setting, lore, story, characters, levels, enemies, bosses, gameplay, equipment, and unique features for each of the following genres:{genreString}. Add an END on its own line to indicate the end of a game idea")
+            f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique mechanics. Add an END on its own line to indicate the end of a game idea")
 
         # print(response.text)
 
     # return parser(response.text)
-    return response.text
+    # return response.text
+    return response.text.replace('\n', '<br>')
 
 
 def parser(output):
@@ -57,13 +58,6 @@ def parser(output):
         else:
             game += word
             game += " "
-
-
-def getGenre():
-    response = requests.get("http://localhost:3000/genre")
-    if response.status_code == 200:
-        # data = response.json()
-        return HttpResponse(response)
 
 
 def getGameIdea(request):
