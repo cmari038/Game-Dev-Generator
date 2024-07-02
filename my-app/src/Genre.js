@@ -15,6 +15,18 @@ const Genre = () => {
     }
  };
 
+ const [theme, addTheme] = useState('');
+
+ const setTheme = (themeChoice) => {
+    addTheme(themeChoice);
+ };
+ 
+ const [topic, addTopic] = useState('');
+
+ const setTopic = (topicChoice) => {
+    addTopic(topicChoice);
+ }; 
+
    return (
         <div>
             <h1>OPTIONAL: Choose your Genre</h1>
@@ -135,8 +147,28 @@ const Genre = () => {
                         Puzzle
                     </button>
 
+                    <p>OPTIONAL: Enter a theme: {theme}</p>
+
+                    <input
+                    type="text"
+                    value={theme}
+                    onChange={setTheme}>
+                    </input>
+
+                    <p>OPTIONAL: Enter a topic: {topic}</p>
+
+                    <input
+                    type="text"
+                    value={topic}
+                    onChange={setTopic}>
+                    </input>
+
+                    <p>
+
                     <a href="http://127.0.0.1:8000/gameIdea/"> Generate a new Game Idea</a>
-        </div> 
+
+                    </p>
+         </div>  
     );
 
    };
