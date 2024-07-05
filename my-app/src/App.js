@@ -3,7 +3,6 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import Genre from './Genre';
 import HomePage from './HomePage';
-import Platform from './Platform';
 //import { Response } from './Response';
 //  <Route path="/response" element = {<Response/>}/>
 
@@ -13,7 +12,6 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element = {<HomePage />} />
-          <Route path="/platform" element = {<Platform/>}/>
           <Route path="/genre" element = {<Genre/>}/>
         </Routes>
       </Router>

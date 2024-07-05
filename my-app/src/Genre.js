@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { sendData } from './DjangoConnect';
 
 const Genre = () => {
    /*const [buttonClick, setClick] = useState(false) 
@@ -7,7 +9,7 @@ const Genre = () => {
    }; */
 
  const [genreList, addGenre] = useState([]);
- 
+
  const setGenre = (genre) => {
     if(!genreList.includes(genre)) {
         addGenre([...genreList, genre]);
@@ -147,25 +149,33 @@ const Genre = () => {
                         Puzzle
                     </button>
 
-                    <p>OPTIONAL: Enter a theme: {theme}</p>
+                    <label>
+                    <p>OPTIONAL: Enter a theme:</p>
+                        <input
+                        type="text"
+                        value={theme}
+                        onChange={e=>setTheme(e.target.value)}>
+                        </input>
 
-                    <input
-                    type="text"
-                    value={theme}
-                    onChange={setTheme}>
-                    </input>
+                    </label>
 
-                    <p>OPTIONAL: Enter a topic: {topic}</p>
+                    <label>
+                    <p>OPTIONAL: Enter a topic:</p>
+                        <input
+                        type="text"
+                        value={topic}
+                        onChange={e=>setTopic(e.target.value)}>
+                        </input>
 
-                    <input
-                    type="text"
-                    value={topic}
-                    onChange={setTopic}>
-                    </input>
+                    </label>
 
                     <p>
 
-                    <a href="http://127.0.0.1:8000/gameIdea/"> Generate a new Game Idea</a>
+                    <Link to= "http://127.0.0.1:8000/gameIdea/">
+                        <button onClick={sendData(genreList, theme, topic)}>
+                            Generate a new Game Idea
+                        </button>
+                    </Link>
 
                     </p>
          </div>  
@@ -176,8 +186,23 @@ const Genre = () => {
    export default Genre;
 
    /*
-   <Link to= "/response">
-   <button onClick={sendData(genreList)}>
+   <Link to= "http://127.0.0.1:8000/gameIdea/">
+   <button onClick={sendData(genreList, theme, topic)}>
        Generate a new Game Idea
    </button>
 </Link> */
+
+//  <a href="http://127.0.0.1:8000/gameIdea/"> Generate a new Game Idea</a>
+
+/*const Checkbox = ({label, value, onChange}) => {
+    return (
+        <label>
+             {label}
+            <input 
+            type="checkbox"
+            checked={value}
+            onChange={onChange}
+            > </input>
+        </label>
+    )
+} */

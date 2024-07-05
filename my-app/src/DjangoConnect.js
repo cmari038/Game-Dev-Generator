@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const backendURL_post = "http://127.0.0.1:8000/gameIdea/"
-const backendURL_get = "http://127.0.0.1:8000/sendGame/"
+//const backendURL_get = "http://127.0.0.1:8000/sendGame/"
 
 /*export const jsonData = {
     //platform: [],
@@ -16,9 +16,9 @@ export function setPlatform(platform) {
     jsonData["Genres"].push(genre);
 }; */
 
-export function sendData(data) {
+export function sendData(genres, theme, topic) {
     
-    axios.post(backendURL_post, data)
+    axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic})
         .then(function (response) {
             console.log(response);
         }) 
@@ -28,7 +28,7 @@ export function sendData(data) {
         })
 }
 
-export function getData() {
+/*export function getData() {
     axios.get(backendURL_get)
     .then(function (response) {
         console.log(response);
@@ -37,4 +37,4 @@ export function getData() {
     .catch(function (error) {
         console.log(error);
     })
-}
+} */
