@@ -3,19 +3,6 @@ import axios from 'axios';
 const backendURL_post = "http://127.0.0.1:8000/gameIdea/"
 //const backendURL_get = "http://127.0.0.1:8000/sendGame/"
 
-/*export const jsonData = {
-    //platform: [],
-    Genres: []
-};
-
-export function setPlatform(platform) {
-    jsonData["platform"].push(platform);
-}; */
-
-/*export function setGenre(jsonData, genre) {
-    jsonData["Genres"].push(genre);
-}; */
-
 export function sendData(genres, theme, topic) {
     
     axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic})
