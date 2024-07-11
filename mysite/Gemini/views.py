@@ -31,7 +31,7 @@ def generateGame(genreList):
 
     if len(genreList) == 0:
         response = model.generate_content(
-            f"Give me 3 unique ideas for games, including a long and detailed description of the game's title, setting, lore, story, characters, levels, enemies, bosses, equipment, gameplay, and unique features. Add an END on its own line to indicate the end of a game idea")
+            f"Give me 3 unique ideas for games, including a long and detailed description of the game's title, setting, lore, story, characters, levels, enemies, bosses, equipment, gameplay features, and unique mechanics. Add an END on its own line to indicate the end of a game idea")
         # print(response.text)
 
     else:
@@ -41,15 +41,16 @@ def generateGame(genreList):
 
         # Query the Model
         response = model.generate_content(
-            f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique mechanics.")
+            f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
 
         # print(response.text)
 
     # return parser(response.text)
-    # return response.text
-    return response.text.replace('\n', '<br>')
+    return response.text
+    # return response.text.replace('\n', '<br>')
 
 
+"""
 @csrf_protect
 def getGameIdea(request):
     genreList = []
@@ -58,6 +59,19 @@ def getGameIdea(request):
         genreList = jsonData.get('genreList')
     return HttpResponse(generateGame(genreList))
     # return HttpResponse(genreList)
+
+
+"""
+
+
+@csrf_protect
+def getGameIdea(request):
+    genreList = []
+    if request.method == 'POST':
+        jsonData = json.loads(request.body)
+        genreList = jsonData.get('genreList')
+    gameIdeas = {'gameIdeas': generateGame(genreList)}
+    return render(request, 'response.html', gameIdeas)
 
 
 def parser(output):
