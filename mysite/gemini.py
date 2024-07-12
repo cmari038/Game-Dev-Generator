@@ -6,6 +6,30 @@ import google.generativeai as genai
 # from views import parser
 
 
+def parser(output, genreList):
+    if len(genreList) == 0:
+        for i in range(len(genreList)):
+            index = output.find("END")
+            games.append(output[0::index])
+            output = output[index+1::len(output)]
+            return games
+        """
+        first_index = output.find("END")
+        game1 = output[0::first_index - 1]
+        second_index = output[first_index+1::len(output)].find("END")
+        game2 = output[first_index + 1::second_index]
+        game3 = output[second_index+1::len(output)-1]
+        return [game1, game2, game3]
+        """
+    else:
+        games = []
+        for genre in genreList:
+            index = output.find("END")
+            games.append(output[0::index])
+            output = output[index+1::len(output)]
+            return games
+
+
 def generateGame(genreList):
     # Using `GOOGLE_API_KEY` environment variable.
     GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -40,7 +64,7 @@ def generateGame(genreList):
     return response.text
 
 
-genreList = ["Roguelike", "Survival", "Open World"]
+genreList = []
 
 output = generateGame(genreList)
 print(output)
