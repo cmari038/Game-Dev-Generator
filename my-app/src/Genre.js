@@ -1,26 +1,39 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { sendData } from './DjangoConnect';
+
 
 const Genre = () => {
-   /*const [buttonClick, setClick] = useState(false) 
-   const Click = () => {
-        setClick(!buttonClick);
-   }; */
+   const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
 
-/*   const Checkbox = ({label, value, onChange}) => {
-    return (
-        <label>
-             {label}
-            <input 
-            type="checkbox"
-            checked={value}
-            id = {label}
-            onChange={onChange}
-            > </input>
-        </label>
-    )
+   //axios.defaults.headers.common['x-csrftoken'] = window.csrftoken;
+
+   //axios.defaults.timeout = 10000;
+
+   /*const sendData = async(genres, theme, topic) => {
+    
+   const sender = await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic})
+   console.log("data sent")
+        .then(function (response) {
+            console.log(response);
+        }) 
+
+        .catch(function (error) {
+            console.log(error);
+        })
 } */
+
+        function sendData(genres, theme, topic) {
+    
+            axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic})
+                .then(function (response) {
+                    console.log(response);
+                }) 
+        
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
 
  const [genreList, addGenre] = useState([]);
 
