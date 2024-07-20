@@ -1,39 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
 const Genre = () => {
    const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
+   //const navigate = useNavigate();
 
    //axios.defaults.headers.common['x-csrftoken'] = window.csrftoken;
-
-   //axios.defaults.timeout = 10000;
-
-   /*const sendData = async(genres, theme, topic) => {
-    
-   const sender = await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic})
-   console.log("data sent")
-        .then(function (response) {
-            console.log(response);
-        }) 
-
-        .catch(function (error) {
-            console.log(error);
-        })
-} */
-
-        function sendData(genres, theme, topic) {
-    
-            axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic})
-                .then(function (response) {
-                    console.log(response);
-                }) 
-        
-                .catch(function (error) {
-                    console.log(error);
-                })
-        }
 
  const [genreList, addGenre] = useState([]);
 
@@ -54,6 +28,8 @@ const Genre = () => {
     }
  };
 
+ // checkboxes
+
  const [checked, setChecked] = useState(new Array(29).fill(false));
 
  const changeCheckbox = (genre, position) => {
@@ -69,17 +45,51 @@ const Genre = () => {
     }
  };
 
+ // theme textbox
+
  const [theme, addTheme] = useState('');
 
  const setTheme = (themeChoice) => {
     addTheme(themeChoice);
  };
  
+ // topic textbox
+
  const [topic, addTopic] = useState('');
 
  const setTopic = (topicChoice) => {
     addTopic(topicChoice);
  }; 
+
+
+ const [click, changeClick] = useState(false);
+
+ const setClick = () => {
+    changeClick(true);
+   }
+
+   useEffect(() => {
+
+    const sendData = async (genres, theme, topic) => {
+    
+           await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic})
+                .then(function (response) {
+                    console.log(response);
+                }) 
+        
+                .catch(function (error) {
+                    console.log(error);
+                })
+            
+            //navigate(backendURL_post);
+            changeClick(false);
+    }
+
+    if(click) {
+        sendData(genreList,theme,topic);
+    }
+
+}, [click, genreList, theme, topic]);
 
    return (
         <div>
@@ -400,7 +410,7 @@ const Genre = () => {
                     <p>
 
                     <Link to= "http://127.0.0.1:8000/gameIdea/">
-                        <button onClick={sendData(genreList, theme, topic)}>
+                        <button onClick={setClick}>
                             Generate a new Game Idea
                         </button>
                     </Link>
@@ -421,3 +431,5 @@ const Genre = () => {
 </Link> */
 
 //  <a href="http://127.0.0.1:8000/gameIdea/"> Generate a new Game Idea</a>
+// <Link to= "http://127.0.0.1:8000/gameIdea/">
+// </Link>
