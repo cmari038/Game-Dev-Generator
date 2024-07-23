@@ -3,8 +3,10 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import Genre from './Genre';
 import HomePage from './HomePage';
-//import { Response } from './Response';
+import Response from './Response';
 //  <Route path="/response" element = {<Response/>}/>
+
+//axios.defaults.headers.common['x-csrftoken'] = window.csrftoken;
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
         <Routes>
           <Route exact path="/" element = {<HomePage />} />
           <Route path="/genre" element = {<Genre/>}/>
+          <Route path="/response" element = {<Response/>}/>
         </Routes>
       </Router>
     </div>

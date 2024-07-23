@@ -5,9 +5,9 @@ import google.generativeai as genai
 import requests
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
-# from models import Game
+from .models import Game
 
 # from gemini import generateGame
 
@@ -51,27 +51,49 @@ def generateGame(genreList):
 
 
 """
-@csrf_protect
-def getGameIdea(request):
-    genreList = []
-    if request.method == 'POST':
-        jsonData = json.loads(request.body)
-        genreList = jsonData.get('genreList')
-    return HttpResponse(generateGame(genreList))
-    # return HttpResponse(genreList)
-
+ <script>
+        function getCookie(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === name + "=") {
+                cookieValue = decodeURIComponent(
+                  cookie.substring(name.length + 1)
+                );
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+        const csrftoken = getCookie("csrftoken");
+        window.csrftoken = csrftoken;
+      </script>
 
 """
 
 
-@csrf_protect
+@csrf_exempt
 def getGameIdea(request):
     genreList = []
     if request.method == 'POST':
-        jsonData = json.loads(request.body)
+        jsonData = json.loads(request.body.decode('utf-8'))
         genreList = jsonData.get('genreList')
-    gameIdeas = {'gameIdeas': generateGame(genreList)}
-    return render(request, 'response.html', gameIdeas)
+        gameIdeas = {'gameIdeas': generateGame(genreList)}
+        # print(gameIdeas['gameIdeas'])
+        # print(genreList)
+        Game.objects.create(game=gameIdeas['gameIdeas'])
+        return HttpResponse('')
+    if request.method == 'GET':
+        game = Game.objects.first()
+        # output = copyString(game.game)
+        # game.delete()
+        # return render(request, 'response.html', gameIdeas)
+        # return HttpResponse(gameIdeas['gameIdeas'])
+        return HttpResponse(game.game)
 
 
 def parser(output, genreList):
@@ -81,14 +103,6 @@ def parser(output, genreList):
             games.append(output[0::index])
             output = output[index+1::len(output)]
             return games
-        """
-        first_index = output.find("END")
-        game1 = output[0::first_index - 1]
-        second_index = output[first_index+1::len(output)].find("END")
-        game2 = output[first_index + 1::second_index]
-        game3 = output[second_index+1::len(output)-1]
-        return [game1, game2, game3]
-        """
     else:
         games = []
         for genre in genreList:
@@ -96,3 +110,15 @@ def parser(output, genreList):
             games.append(output[0::index])
             output = output[index+1::len(output)]
             return games
+
+
+def printGenres(genreList):
+    for genre in genreList:
+        print(genre)
+
+
+def copyString(text):
+    copy = ''
+    for letter in text:
+        copy += letter
+    return copy

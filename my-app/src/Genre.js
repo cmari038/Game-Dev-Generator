@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Genre = () => {
@@ -64,6 +64,8 @@ const Genre = () => {
 
  const [click, changeClick] = useState(false);
 
+ const navigate = useNavigate();
+
  const setClick = () => {
     changeClick(true);
    }
@@ -81,7 +83,7 @@ const Genre = () => {
                     console.log(error);
                 })
             
-            //navigate(backendURL_post);
+            navigate("/response");
             changeClick(false);
     }
 
@@ -89,7 +91,7 @@ const Genre = () => {
         sendData(genreList,theme,topic);
     }
 
-}, [click, genreList, theme, topic]);
+}, [navigate, click, genreList, theme, topic]);
 
    return (
         <div>
@@ -408,12 +410,10 @@ const Genre = () => {
                     </label>
 
                     <p>
-
-                    <Link to= "http://127.0.0.1:8000/gameIdea/">
+ 
                         <button onClick={setClick}>
                             Generate a new Game Idea
                         </button>
-                    </Link>
 
                     </p>
          </div>  
