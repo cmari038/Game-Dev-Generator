@@ -89,11 +89,12 @@ def getGameIdea(request):
         return HttpResponse('')
     if request.method == 'GET':
         game = Game.objects.first()
-        # output = copyString(game.game)
+        output = copyString(game.game)
         # game.delete()
         # return render(request, 'response.html', gameIdeas)
         # return HttpResponse(gameIdeas['gameIdeas'])
-        return HttpResponse(game.game)
+        Game.objects.all().delete()
+        return HttpResponse(output)
 
 
 def parser(output, genreList):

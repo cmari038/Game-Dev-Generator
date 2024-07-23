@@ -9,7 +9,7 @@ const HomePage = () => {
    return ( 
          
             <div>
-                <h1>Welcome to Game Recommendations.</h1>
+                <h1>Welcome to Game Dev Generator.</h1>
                 <p>This website uses Google's Gemini AI to creates new ideas for games that developers can design </p>
 
                 <Link to= "/genre">
