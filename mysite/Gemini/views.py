@@ -99,14 +99,14 @@ def getGameIdea(request):
 
 def parser(output, genreList):
     if len(genreList) == 0:
-        for i in range(len(genreList)):
+        for i in range(3):
             index = output.find("END")
             games.append(output[0::index])
             output = output[index+1::len(output)]
             return games
     else:
         games = []
-        for genre in genreList:
+        for i in range(len(genreList)):
             index = output.find("END")
             games.append(output[0::index])
             output = output[index+1::len(output)]
