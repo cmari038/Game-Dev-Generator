@@ -282,11 +282,11 @@ const Genre = () => {
                     </label>
 
                     <label>
-                        Extraction
+                        Extraction Shooter
                             <input
                             type="checkbox"
                             checked={checked[18]}
-                            id = "Extraction"
+                            id = "Extraction Shooter"
                             onChange={e=>changeCheckbox(e.target.id, 18)}>
                             </input>
                     </label>

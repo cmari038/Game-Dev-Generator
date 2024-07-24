@@ -14,7 +14,7 @@ from .models import Game
 # Create your views here.
 
 
-def generateGame(genreList):
+def generateGame(genreList, theme, topic):
     # Using `GOOGLE_API_KEY` environment variable.
     GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
     genai.configure(api_key=GOOGLE_API_KEY)
@@ -30,20 +30,43 @@ def generateGame(genreList):
     model = genai.GenerativeModel(model_name="gemini-pro")
 
     if len(genreList) == 0:
-        response = model.generate_content(
-            f"Give me 3 unique ideas for games, including a long and detailed description of the game's title, setting, lore, story, characters, levels, enemies, bosses, equipment, gameplay features, and unique mechanics. Add an END on its own line to indicate the end of a game idea")
-        # print(response.text)
+        if theme == '' and topic == '':
+            response = model.generate_content(
+                f"Give me a unique idea for a game, including a long and detailed description of the game's genre, title, setting, lore, story, characters, levels, enemies, bosses, equipment, gameplay features, and unique mechanics. Add an END on its own line to indicate the end of a game idea")
+        elif theme != '' and topic == '':
+            response = model.generate_content(
+                f"Give me a unique idea for a {theme} game, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+
+        elif theme == '' and topic != '':
+            response = model.generate_content(
+                f"Give me a unique idea for a game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+
+        else:
+            response = model.generate_content(
+                f"Give me a unique idea for a {theme} game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
 
     else:
         genreString = ''
         for genre in genreList:
             genreString = genreString + genre + ", "
 
-        # Query the Model
-        response = model.generate_content(
-            f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+        if theme == '' and topic == '':
+            # Query the Model
+            response = model.generate_content(
+                f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
 
-        # print(response.text)
+            # print(response.text)
+        elif theme != '' and topic == '':
+            response = model.generate_content(
+                f"Give me a unique idea for a {theme} game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+
+        elif theme == '' and topic != '':
+            response = model.generate_content(
+                f"Give me a unique idea for a game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+
+        else:
+            response = model.generate_content(
+                f"Give me a unique idea for a {theme} game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
 
     # return parser(response.text)
     return response.text
@@ -82,7 +105,9 @@ def getGameIdea(request):
     if request.method == 'POST':
         jsonData = json.loads(request.body.decode('utf-8'))
         genreList = jsonData.get('genreList')
-        gameIdeas = {'gameIdeas': generateGame(genreList)}
+        theme = jsonData.get('Theme')
+        topic = jsonData.get('Topic')
+        gameIdeas = {'gameIdeas': generateGame(genreList, theme, topic)}
         # print(gameIdeas['gameIdeas'])
         # print(genreList)
         Game.objects.create(game=gameIdeas['gameIdeas'])
