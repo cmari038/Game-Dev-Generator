@@ -36,7 +36,7 @@ const Response = () => {
     return (
 
         <div style={{whiteSpace: "pre-wrap"}}>
-            <h1>Game Ideas</h1>
+            <h1 style={{textAlign: "center"}}>Game Ideas</h1>
             <p>
                 {output}
 

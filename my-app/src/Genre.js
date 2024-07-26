@@ -30,7 +30,7 @@ const Genre = () => {
 
  // checkboxes
 
- const [checked, setChecked] = useState(new Array(29).fill(false));
+ const [checked, setChecked] = useState(new Array(30).fill(false));
 
  const changeCheckbox = (genre, position) => {
     const updatedCheckedState = checked.map((item, index) => index === position ? !item : item);
@@ -94,8 +94,8 @@ const Genre = () => {
 }, [navigate, click, genreList, theme, topic]);
 
    return (
-        <div>
-            <h1>OPTIONAL: Choose your Genre</h1>
+        <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center'}}>
+            <h1 style={{textAlign: "center"}}>OPTIONAL: Choose your Genre</h1>
 
                     <label>
                         Fighter
@@ -392,7 +392,17 @@ const Genre = () => {
                     </label>
 
                     <label>
-                    <p>OPTIONAL: Enter a theme:</p>
+                        Open World
+                            <input
+                            type="checkbox"
+                            checked={checked[29]}
+                            id = "Open World"
+                            onChange={e=>changeCheckbox(e.target.id, 29)}>
+                            </input>
+                    </label>
+
+                    <label>
+                    <p>OPTIONAL: Enter a theme(Sci-fi, Steampunk, Horror, etc):</p>
                         <input
                         type="text"
                         value={theme}
@@ -401,7 +411,7 @@ const Genre = () => {
                     </label>
 
                     <label>
-                    <p>OPTIONAL: Enter a topic:</p>
+                    <p>OPTIONAL: Enter a topic(spies, monsters, aliens, pirates, etc):</p>
                         <input
                         type="text"
                         value={topic}
@@ -411,7 +421,7 @@ const Genre = () => {
 
                     <p>
  
-                        <button onClick={setClick}>
+                        <button onClick={setClick} style={{textAlign: "center"}}>
                             Generate a new Game Idea
                         </button>
 

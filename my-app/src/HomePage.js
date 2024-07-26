@@ -9,8 +9,8 @@ const HomePage = () => {
    return ( 
          
             <div>
-                <h1>Welcome to Game Dev Generator.</h1>
-                <p>This website uses Google's Gemini AI to creates new ideas for games that developers can design </p>
+                <h1 style={{textAlign: "center"}}>Welcome to Game Dev Generator</h1>
+                <p> This website uses Google's Gemini AI to creates new ideas for games that developers can design </p>
 
                 <Link to= "/genre">
                     <button>Games To Make</button>
