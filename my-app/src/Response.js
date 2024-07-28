@@ -17,16 +17,21 @@ const Response = () => {
    useEffect(() => {
 
     const games = async () => { 
+
+        //axios.defaults.xsrfCookieName = 'csrftoken';
+        //axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"; 
         
        await axios.get(backendURL_post)
         .then( response => {
             setOutput(response.data)
+            //axios.defaults.headers.common['x-csrftoken'] = response.data.CSRFToken;
             console.log(response);
         }) 
 
         .catch(function (error) {
             console.log(error);
         })
+
     }
 
     games();

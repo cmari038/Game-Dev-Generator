@@ -3,9 +3,11 @@ import os
 
 import google.generativeai as genai
 import requests
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.middleware.csrf import get_token
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.views.decorators.csrf import (csrf_exempt, csrf_protect,
+                                          ensure_csrf_cookie)
 
 from .models import Game
 
@@ -32,18 +34,18 @@ def generateGame(genreList, theme, topic):
     if len(genreList) == 0:
         if theme == '' and topic == '':
             response = model.generate_content(
-                f"Give me a unique idea for a game, including a long and detailed description of the game's genre, title, setting, lore, story, characters, levels, enemies, bosses, equipment, gameplay features, and unique mechanics. Add an END on its own line to indicate the end of a game idea")
+                f"Give me a unique idea for a game, including a long and detailed description of the game's genre, title, setting, lore, story, characters, levels, enemies, bosses, equipment, gameplay features, and unique mechanics.")
         elif theme != '' and topic == '':
             response = model.generate_content(
-                f"Give me a unique idea for a {theme} game, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+                f"Give me a unique idea for a {theme} game, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
         elif theme == '' and topic != '':
             response = model.generate_content(
-                f"Give me a unique idea for a game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+                f"Give me a unique idea for a game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
         else:
             response = model.generate_content(
-                f"Give me a unique idea for a {theme} game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+                f"Give me a unique idea for a {theme} game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
     else:
         genreString = ''
@@ -53,20 +55,20 @@ def generateGame(genreList, theme, topic):
         if theme == '' and topic == '':
             # Query the Model
             response = model.generate_content(
-                f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+                f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
             # print(response.text)
         elif theme != '' and topic == '':
             response = model.generate_content(
-                f"Give me a unique idea for a {theme} game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+                f"Give me a unique idea for a {theme} game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
         elif theme == '' and topic != '':
             response = model.generate_content(
-                f"Give me a unique idea for a game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+                f"Give me a unique idea for a game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
         else:
             response = model.generate_content(
-                f"Give me a unique idea for a {theme} game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features. Add an END on its own line to indicate the end of a game idea")
+                f"Give me a unique idea for a {theme} game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
     # return parser(response.text)
     return response.text
@@ -95,11 +97,17 @@ def generateGame(genreList, theme, topic):
         const csrftoken = getCookie("csrftoken");
         window.csrftoken = csrftoken;
       </script>
-
 """
 
 
-@csrf_exempt
+@ensure_csrf_cookie
+def Cookie(request):
+    csrf = get_token(request)
+   # print(csrf)
+    return JsonResponse({'csrftoken': "Success"})
+
+
+# @ensure_csrf_cookie
 def getGameIdea(request):
     genreList = []
     if request.method == 'POST':

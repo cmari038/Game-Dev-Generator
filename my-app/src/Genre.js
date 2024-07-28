@@ -1,13 +1,14 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import CSRFToken from './csrftoken';
 
 const Genre = () => {
    const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
-   //const navigate = useNavigate();
 
-   //axios.defaults.headers.common['x-csrftoken'] = window.csrftoken;
+   //const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+   //axios.defaults.headers.common['x-csrftoken'] = token;
 
  const [genreList, addGenre] = useState([]);
 
@@ -73,8 +74,13 @@ const Genre = () => {
    useEffect(() => {
 
     const sendData = async (genres, theme, topic) => {
-    
-           await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic})
+
+          // axios.defaults.xsrfCookieName = 'csrftoken';
+           //axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+           axios.defaults.withCredentials = true;
+            
+           await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic}, {
+            'X-CSRFToken': Cookies.get('csrftoken')})
                 .then(function (response) {
                     console.log(response);
                 }) 
@@ -95,7 +101,11 @@ const Genre = () => {
 
    return (
         <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center'}}>
-            <h1 style={{textAlign: "center"}}>OPTIONAL: Choose your Genre</h1>
+            <h1 style={{textAlign: "center"}}>OPTIONAL: Choose your Gameplay Style</h1>
+
+            <form style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center'}}>
+
+            <CSRFToken/>
 
                     <label>
                         Fighter
@@ -118,11 +128,11 @@ const Genre = () => {
                     </label>
 
                     <label>
-                        FPS
+                        Shooter
                             <input
                             type="checkbox"
                             checked={checked[2]}
-                            id = "FPS"
+                            id = "Shooter"
                             onChange={e=>changeCheckbox(e.target.id, 2)}>
                             </input>
                     </label>
@@ -180,11 +190,11 @@ const Genre = () => {
 
 
                     <label>
-                        Looter Shooter
+                        Turn Based Strategy
                             <input
                             type="checkbox"
                             checked={checked[8]}
-                            id = "Looter Shooter"
+                            id = "Turn Based Strategy"
                             onChange={e=>changeCheckbox(e.target.id, 8)}>
                             </input>
                     </label>
@@ -402,7 +412,7 @@ const Genre = () => {
                     </label>
 
                     <label>
-                    <p>OPTIONAL: Enter a theme(Sci-fi, Steampunk, Horror, etc):</p>
+                    <h2>OPTIONAL: Enter a theme(Sci-fi, Steampunk, Horror, etc):</h2>
                         <input
                         type="text"
                         value={theme}
@@ -411,7 +421,7 @@ const Genre = () => {
                     </label>
 
                     <label>
-                    <p>OPTIONAL: Enter a topic(spies, monsters, aliens, pirates, etc):</p>
+                    <h3>OPTIONAL: Enter a topic(spies, monsters, aliens, pirates, etc):</h3>
                         <input
                         type="text"
                         value={topic}
@@ -426,6 +436,7 @@ const Genre = () => {
                         </button>
 
                     </p>
+                    </form>
          </div>  
     );
 

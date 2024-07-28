@@ -70,9 +70,14 @@ CORS_ALLOW_HEADERS = [
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://192.168.1.162:3000',
+    'http://localhost:3000/response',
+    'http://localhost:3000/genre',
+    'http://127.0.0.1:8000/gameIdea/',
+
 ]
 
 CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SECURE = False
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',

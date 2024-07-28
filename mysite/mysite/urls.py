@@ -20,7 +20,6 @@ from Gemini import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # path("genre/", views.getGenre, name="getGenre"),
     path("gameIdea/", views.getGameIdea, name="getGameIdea"),
-    # path("sendGame/", views.sendGameIdea, name="sendGameIdea"),
+    path("cookie/", views.Cookie, name="Cookie"),
 ]
