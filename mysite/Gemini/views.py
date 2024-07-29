@@ -102,12 +102,13 @@ def generateGame(genreList, theme, topic):
 
 @ensure_csrf_cookie
 def Cookie(request):
-    csrf = get_token(request)
+    # csrf = get_token(request)
    # print(csrf)
-    return JsonResponse({'csrftoken': "Success"})
+    # return JsonResponse({'csrftoken': "Success"})
+    return JsonResponse({'csrftoken': get_token(request=request)})
 
 
-# @ensure_csrf_cookie
+# @csrf_protect
 def getGameIdea(request):
     genreList = []
     if request.method == 'POST':

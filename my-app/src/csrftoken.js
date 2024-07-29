@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
 
 const CSRFToken = () => {
@@ -37,10 +38,9 @@ const CSRFToken = () => {
 
             } */
 
-          
               await axios.get(DjangoCookie, {withCredentials: true})
               .then(response => {
-                setCSRFToken(getCookie('csrftoken'));
+                setCSRFToken(Cookies.get('csrftoken'));
                // console.log(csrftoken);
               });
 
@@ -54,11 +54,11 @@ const CSRFToken = () => {
 
   
        return (
-            <input type='hidden' name='csrf' value={csrftoken}>
+            <input type='hidden' id='csrf' value={csrftoken}>
             </input>
-        ); 
+        );  
   
-        //return csrftoken;
+   //   return csrftoken;
 };
 
 export default CSRFToken;

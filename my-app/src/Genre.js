@@ -1,11 +1,11 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CSRFToken from './csrftoken';
 
 const Genre = () => {
    const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
+   //const DjangoCookie = "http://127.0.0.1:8000/cookie/";
 
    //const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
    //axios.defaults.headers.common['x-csrftoken'] = token;
@@ -62,6 +62,13 @@ const Genre = () => {
     addTopic(topicChoice);
  }; 
 
+ // posting data 
+
+ const [csrftoken, setCSRFToken] = useState('')
+
+ const addCSRF = (token) => {
+    setCSRFToken(token);
+ }
 
  const [click, changeClick] = useState(false);
 
@@ -75,12 +82,14 @@ const Genre = () => {
 
     const sendData = async (genres, theme, topic) => {
 
-          // axios.defaults.xsrfCookieName = 'csrftoken';
-           //axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-           axios.defaults.withCredentials = true;
-            
-           await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic}, {
-            'X-CSRFToken': Cookies.get('csrftoken')})
+        addCSRF(document.getElementById('csrf').value);
+        
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.withXSRFToken = true;
+
+        await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic}, {
+            'X-CSRFToken': csrftoken}, {withCredentials: true})
                 .then(function (response) {
                     console.log(response);
                 }) 
@@ -97,13 +106,11 @@ const Genre = () => {
         sendData(genreList,theme,topic);
     }
 
-}, [navigate, click, genreList, theme, topic]);
+}, [navigate, click, genreList, theme, topic, csrftoken]);
 
    return (
         <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center'}}>
             <h1 style={{textAlign: "center"}}>OPTIONAL: Choose your Gameplay Style</h1>
-
-            <form style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center'}}>
 
             <CSRFToken/>
 
@@ -436,7 +443,6 @@ const Genre = () => {
                         </button>
 
                     </p>
-                    </form>
          </div>  
     );
 
