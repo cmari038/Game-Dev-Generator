@@ -64,11 +64,11 @@ const Genre = () => {
 
  // posting data 
 
- const [csrftoken, setCSRFToken] = useState('')
+ /*const [csrftoken, setCSRFToken] = useState('')
 
  const addCSRF = (token) => {
     setCSRFToken(token);
- }
+ } */
 
  const [click, changeClick] = useState(false);
 
@@ -82,7 +82,8 @@ const Genre = () => {
 
     const sendData = async (genres, theme, topic) => {
 
-        addCSRF(document.getElementById('csrf').value);
+        //addCSRF(document.getElementById('csrf').value);
+        const csrftoken = document.getElementById('csrf').value;
 
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
         axios.defaults.xsrfCookieName = 'csrftoken';
@@ -107,7 +108,7 @@ const Genre = () => {
         sendData(genreList,theme,topic);
     }
 
-}, [navigate, click, genreList, theme, topic, csrftoken]);
+}, [navigate, click, genreList, theme, topic]);
 
    return (
         <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center'}}>
