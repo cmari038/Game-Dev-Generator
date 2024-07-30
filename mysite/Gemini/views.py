@@ -105,7 +105,7 @@ def Cookie(request):
     # csrf = get_token(request)
    # print(csrf)
     # return JsonResponse({'csrftoken': "Success"})
-    return JsonResponse({'csrftoken': get_token(request=request)})
+    return HttpResponse(get_token(request=request))
 
 
 # @csrf_protect

@@ -83,13 +83,14 @@ const Genre = () => {
     const sendData = async (genres, theme, topic) => {
 
         addCSRF(document.getElementById('csrf').value);
-        
+
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.withXSRFToken = true;
 
-        await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic}, {
-            'X-CSRFToken': csrftoken}, {withCredentials: true})
+       // console.log(csrftoken);
+
+        await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic}, {headers: {'X-CSRFToken':csrftoken, 'Content-Type': 'application/json'}, withCredentials: true})
                 .then(function (response) {
                     console.log(response);
                 }) 
