@@ -1,13 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import CSRFToken from './csrftoken';
 
 const Genre = () => {
    const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
-   //const navigate = useNavigate();
+   //const DjangoCookie = "http://127.0.0.1:8000/cookie/";
 
-   //axios.defaults.headers.common['x-csrftoken'] = window.csrftoken;
+   //const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+   //axios.defaults.headers.common['x-csrftoken'] = token;
 
  const [genreList, addGenre] = useState([]);
 
@@ -61,6 +62,13 @@ const Genre = () => {
     addTopic(topicChoice);
  }; 
 
+ // posting data 
+
+ /*const [csrftoken, setCSRFToken] = useState('')
+
+ const addCSRF = (token) => {
+    setCSRFToken(token);
+ } */
 
  const [click, changeClick] = useState(false);
 
@@ -73,8 +81,17 @@ const Genre = () => {
    useEffect(() => {
 
     const sendData = async (genres, theme, topic) => {
-    
-           await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic})
+
+        //addCSRF(document.getElementById('csrf').value);
+        const csrftoken = document.getElementById('csrf').value;
+
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.withXSRFToken = true;
+
+       // console.log(csrftoken);
+
+        await axios.post(backendURL_post, {genreList: genres, Theme: theme, Topic: topic}, {headers: {'X-CSRFToken':csrftoken, 'Content-Type': 'application/json'}, withCredentials: true})
                 .then(function (response) {
                     console.log(response);
                 }) 
@@ -95,7 +112,9 @@ const Genre = () => {
 
    return (
         <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center'}}>
-            <h1 style={{textAlign: "center"}}>OPTIONAL: Choose your Genre</h1>
+            <h1 style={{textAlign: "center"}}>OPTIONAL: Choose your Gameplay Style</h1>
+
+            <CSRFToken/>
 
                     <label>
                         Fighter
@@ -118,11 +137,11 @@ const Genre = () => {
                     </label>
 
                     <label>
-                        FPS
+                        Shooter
                             <input
                             type="checkbox"
                             checked={checked[2]}
-                            id = "FPS"
+                            id = "Shooter"
                             onChange={e=>changeCheckbox(e.target.id, 2)}>
                             </input>
                     </label>
@@ -180,11 +199,11 @@ const Genre = () => {
 
 
                     <label>
-                        Looter Shooter
+                        Turn Based Strategy
                             <input
                             type="checkbox"
                             checked={checked[8]}
-                            id = "Looter Shooter"
+                            id = "Turn Based Strategy"
                             onChange={e=>changeCheckbox(e.target.id, 8)}>
                             </input>
                     </label>
@@ -402,7 +421,7 @@ const Genre = () => {
                     </label>
 
                     <label>
-                    <p>OPTIONAL: Enter a theme(Sci-fi, Steampunk, Horror, etc):</p>
+                    <h2>OPTIONAL: Enter a theme(Sci-fi, Steampunk, Horror, etc):</h2>
                         <input
                         type="text"
                         value={theme}
@@ -411,7 +430,7 @@ const Genre = () => {
                     </label>
 
                     <label>
-                    <p>OPTIONAL: Enter a topic(spies, monsters, aliens, pirates, etc):</p>
+                    <h3>OPTIONAL: Enter a topic(spies, monsters, aliens, pirates, etc):</h3>
                         <input
                         type="text"
                         value={topic}
