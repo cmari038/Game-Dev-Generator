@@ -64,7 +64,7 @@ def generateGame(genreList):
     return response.text
 
 
-genreList = ["4x strategy"]
+genreList = ["Dungeon Crawler"]
 
 output = generateGame(genreList)
 print(output)

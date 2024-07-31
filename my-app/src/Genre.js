@@ -31,7 +31,7 @@ const Genre = () => {
 
  // checkboxes
 
- const [checked, setChecked] = useState(new Array(30).fill(false));
+ const [checked, setChecked] = useState(new Array(34).fill(false));
 
  const changeCheckbox = (genre, position) => {
     const updatedCheckedState = checked.map((item, index) => index === position ? !item : item);
@@ -421,6 +421,46 @@ const Genre = () => {
                     </label>
 
                     <label>
+                        Tactical RPG
+                            <input
+                            type="checkbox"
+                            checked={checked[30]}
+                            id = "Tactical RPG"
+                            onChange={e=>changeCheckbox(e.target.id, 30)}>
+                            </input>
+                    </label>
+
+                    <label>
+                         CRPG
+                            <input
+                            type="checkbox"
+                            checked={checked[31]}
+                            id = "CRPG"
+                            onChange={e=>changeCheckbox(e.target.id, 31)}>
+                            </input>
+                    </label>
+
+                    <label>
+                         Monster Tamer
+                            <input
+                            type="checkbox"
+                            checked={checked[32]}
+                            id = "Monster Tamer"
+                            onChange={e=>changeCheckbox(e.target.id, 32)}>
+                            </input>
+                    </label>
+
+                    <label>
+                         Dungeon Crawler
+                            <input
+                            type="checkbox"
+                            checked={checked[33]}
+                            id = "Dungeon Crawler"
+                            onChange={e=>changeCheckbox(e.target.id, 33)}>
+                            </input>
+                    </label>
+
+                    <label>
                     <h2>OPTIONAL: Enter a theme(Sci-fi, Steampunk, Horror, etc):</h2>
                         <input
                         type="text"
@@ -439,11 +479,9 @@ const Genre = () => {
                     </label>
 
                     <p>
- 
                         <button onClick={setClick} style={{textAlign: "center"}}>
                             Generate a new Game Idea
                         </button>
-
                     </p>
          </div>  
     );
