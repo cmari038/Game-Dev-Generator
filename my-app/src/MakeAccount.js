@@ -39,6 +39,17 @@ const MakeAccount = () => {
 
             </label>
 
+            <label>
+           Confirm Password
+                <input
+                    type="text"
+                    value={password}
+                    onChange={setPassword}
+                >
+                </input>
+
+            </label>
+
         </div>
 
     );
