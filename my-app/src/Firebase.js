@@ -30,10 +30,41 @@ ui.start('#firebaseui-auth-container', {
     // Other config options...
   });
 
+  /*
+
   if (ui.isPendingRedirect()) {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
   // This can also be done via:
   if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
     ui.start('#firebaseui-auth-container', uiConfig);
-  }
+  } */
+
+    import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+
+      import { signInWithEmailAndPassword } from "firebase/auth";
+
+//const auth = getAuth();
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
