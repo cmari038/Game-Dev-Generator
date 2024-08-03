@@ -1,35 +1,54 @@
-import React from "react";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import React, { useState } from "react";
+
 const MakeAccount = () => {
-    
-    const [userName, getUserName] = useState('');
-    const [password, getPassword] = useState('');
 
-    const setUserName = (username) => {
-        getUserName(username);
-    }
+const [email, getemail] = useState('');
+const [password, getPassword] = useState('');
 
-    const setPassword = (pwd) => {
-        getPassword(pwd);
-    }
+const setemail = (email) => {
+    getemail(email);
+}
+
+const setPassword = (pwd) => {
+    getPassword(pwd);
+}
+
+const auth = getAuth();
+
+const createAccount = async(auth, email, password) => {
+createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+
+}
 
     return (
-        <div>
+        <div style={{textAlign: "center"}}>
 
             <h1>Make an Account</h1>
 
             <label>
-            Enter a username
+           <h2>Enter an Email</h2>
                 <input
                     type="text"
-                    value={userName}
-                    onChange={setUserName}
+                    value={email}
+                    onChange={setemail}
                 >
                 </input>
 
             </label>
 
             <label>
-            Enter a password
+            <h3>Enter a password</h3>
                 <input
                     type="text"
                     value={password}
@@ -39,16 +58,9 @@ const MakeAccount = () => {
 
             </label>
 
-            <label>
-           Confirm Password
-                <input
-                    type="text"
-                    value={password}
-                    onChange={setPassword}
-                >
-                </input>
-
-            </label>
+            <button onClick={createAccount(auth, email, password)}>
+                Create Account
+            </button>
 
         </div>
 

@@ -62,13 +62,6 @@ const Genre = () => {
     addTopic(topicChoice);
  }; 
 
- // posting data 
-
- /*const [csrftoken, setCSRFToken] = useState('')
-
- const addCSRF = (token) => {
-    setCSRFToken(token);
- } */
 
  const [click, changeClick] = useState(false);
 

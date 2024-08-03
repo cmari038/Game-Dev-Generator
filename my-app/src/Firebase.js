@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,27 +18,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+//const analytics = getAnalytics(app);
 
-// Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
+export const auth = getAuth(app);
+export default app;
 
-ui.start('#firebaseui-auth-container', {
-    signInOptions: [
-      firebase.auth.EmailAuthProvider.PROVIDER_ID
-    ],
-    // Other config options...
-  });
-
-  /*
-
-  if (ui.isPendingRedirect()) {
-    ui.start('#firebaseui-auth-container', uiConfig);
-  }
-  // This can also be done via:
-  if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-    ui.start('#firebaseui-auth-container', uiConfig);
-  } */
+/*
 
     import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
@@ -55,7 +40,8 @@ ui.start('#firebaseui-auth-container', {
         // ..
       });
 
-      import { signInWithEmailAndPassword } from "firebase/auth";
+    
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 //const auth = getAuth();
 signInWithEmailAndPassword(auth, email, password)
@@ -67,4 +53,4 @@ signInWithEmailAndPassword(auth, email, password)
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-  });
+  }); */

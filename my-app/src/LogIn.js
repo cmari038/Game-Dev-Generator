@@ -1,52 +1,84 @@
-import React from "react";
-const MakeAccount = () => {
-    
-    const [userName, getUserName] = useState('');
-    const [password, getPassword] = useState('');
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { auth } from "./Firebase";
 
-    const setUserName = (username) => {
-        getUserName(username);
-    }
+const LogIn = () => {
 
-    const setPassword = (pwd) => {
-        getPassword(pwd);
-    }
+const [email, getEmail] = useState('');
+const [password, getPassword] = useState('');
 
-    return (
-        <div>
+const setEmail = (email) => {
+    getEmail(email);
+};
+
+const setPassword = (pwd) => {
+    getPassword(pwd);
+};
+
+const signIn = async (auth, email, password) => {
+
+await signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+
+};
+
+
+return (
+        <div style={{textAlign: "center"}}>
 
             <h1>Log In</h1>
 
             <label>
-            Username
+           <h2>Email</h2>
                 <input
                     type="text"
-                    value={userName}
-                    onChange={setUserName}
+                    value={email}
+                    onChange={e=>setEmail(e.target.value)}
                 >
                 </input>
 
             </label>
+            
 
             <label>
-            Password
+            <h3>Password</h3>
                 <input
                     type="text"
                     value={password}
-                    onChange={setPassword}
+                    onChange={e=>setPassword(e.target.value)}
                 >
                 </input>
 
             </label>
 
-            <button style={{textAlign: "center"}}>
+            <button onClick={signIn(auth, email, password)} style={{textAlign: "center"}}>
                             Log in
-                        </button>
+            </button>
+
+        <Link to="/makeAccount">
+        <button>
+            Sign Up
+        </button>
+        </Link>
+
 
         </div>
 
-    );
+    ); 
    
 };
 
-export default MakeAccount;
+export default LogIn;
+
+//<Link to= "/">
+//<button>Games To Make</button>
+//</Link>
