@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "./Firebase";
 
 const LogIn = () => {
@@ -16,20 +16,35 @@ const setPassword = (pwd) => {
     getPassword(pwd);
 };
 
+const [click, addClick] = useState(false);
+
+const setClick = () => {
+    addClick(true);
+}
+
+const navigate = useNavigate();
+
+useEffect(() => {
+
 const signIn = async (auth, email, password) => {
+    await signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
+}
 
-await signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+if (click) {
+    signIn(auth, email, password);
+    navigate("/home");
+}
 
-};
+}, [click, email, password, navigate]);
 
 
 return (
@@ -60,7 +75,7 @@ return (
 
             </label>
 
-            <button onClick={signIn(auth, email, password)} style={{textAlign: "center"}}>
+            <button onClick={setClick} style={{textAlign: "center"}}>
                             Log in
             </button>
 

@@ -1,5 +1,6 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import { auth } from "./Firebase";
 
 const MakeAccount = () => {
 
@@ -14,22 +15,31 @@ const setPassword = (pwd) => {
     getPassword(pwd);
 }
 
-const auth = getAuth();
-
-const createAccount = async(auth, email, password) => {
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-
+const [click, addClick] = useState(false);
+const setClick = () => {
+    addClick(true);
 }
+
+useEffect(() => {
+const createAccount = async(auth, email, password) => {
+    await createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        // ...
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+    });
+}
+
+if(click) {
+    createAccount(auth,email,password);
+} 
+
+}, [click, email, password] );
 
     return (
         <div style={{textAlign: "center"}}>
@@ -58,7 +68,7 @@ createUserWithEmailAndPassword(auth, email, password)
 
             </label>
 
-            <button onClick={createAccount(auth, email, password)}>
+            <button onClick={setClick}>
                 Create Account
             </button>
 
