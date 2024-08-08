@@ -1,26 +1,45 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth } from "./Firebase";
+
 
 const MakeAccount = () => {
 
-const [email, getemail] = useState('');
+const [email,getEmail] = useState('');
 const [password, getPassword] = useState('');
 
-const setemail = (email) => {
-    getemail(email);
+const setEmail = (email) => {
+   getEmail(email);
 }
 
 const setPassword = (pwd) => {
     getPassword(pwd);
 }
 
-const [click, addClick] = useState(false);
-const setClick = () => {
-    addClick(true);
-}
+const navigate = useNavigate();
 
-useEffect(() => {
+const createAccount = async(e) => {
+    e.preventDefault();
+
+    await createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/")
+
+        // ...
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+        // ..
+    });
+}
+/*useEffect(() => {
 const createAccount = async(auth, email, password) => {
     await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -33,15 +52,16 @@ const createAccount = async(auth, email, password) => {
         const errorMessage = error.message;
         // ..
     });
-}
+} 
 
 if(click) {
     createAccount(auth,email,password);
 } 
 
-}, [click, email, password] );
+}, [click, email, password] ); */
 
     return (
+        <form>
         <div style={{textAlign: "center"}}>
 
             <h1>Make an Account</h1>
@@ -51,7 +71,7 @@ if(click) {
                 <input
                     type="text"
                     value={email}
-                    onChange={setemail}
+                    onChange={e=>setEmail(e.target.value)}
                 >
                 </input>
 
@@ -62,18 +82,18 @@ if(click) {
                 <input
                     type="text"
                     value={password}
-                    onChange={setPassword}
+                    onChange={e=>setPassword(e.target.value)}
                 >
                 </input>
 
             </label>
 
-            <button onClick={setClick}>
+            <button type="submit" onClick={createAccount}>
                 Create Account
             </button>
 
         </div>
-
+    </form>
     );
    
 };

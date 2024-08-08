@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+//import { email } from "./LogIn";
 
 const Response = () => {
 
@@ -38,6 +39,12 @@ const Response = () => {
 
 }, []);
 
+const saveData = async() => {
+  /*  db.collection(email).add({
+        "Game": output,
+    }) */
+}
+
     return (
 
         <div style={{whiteSpace: "pre-wrap"}}>
@@ -56,6 +63,11 @@ const Response = () => {
                     Home
                 </button>
                 </Link>
+
+                <button onClick={saveData}>
+                   Save
+                </button>
+
             </p>
         </div>
 
