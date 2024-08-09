@@ -17,6 +17,12 @@ const setPassword = (pwd) => {
     getPassword(pwd);
 }
 
+const [error, getError] = useState('');
+
+const setError = (issue) => {
+    getError(issue);
+}
+
 const navigate = useNavigate();
 
 const createAccount = async(e) => {
@@ -36,6 +42,7 @@ const createAccount = async(e) => {
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
+        setError(errorMessage);
         // ..
     });
 }
@@ -91,6 +98,10 @@ if(click) {
             <button type="submit" onClick={createAccount}>
                 Create Account
             </button>
+            
+            <label>
+                {error}
+            </label>
 
         </div>
     </form>

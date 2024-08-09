@@ -16,6 +16,12 @@ const setPassword = (pwd) => {
     getPassword(pwd);
 };
 
+const [error, getError] = useState('');
+
+const setError = (issue) => {
+    getError(issue);
+}
+
 const navigate = useNavigate();
 
 const signIn = async (e) => {
@@ -34,6 +40,7 @@ const signIn = async (e) => {
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
+        setError(errorMessage);
     });
 }
 
@@ -101,6 +108,11 @@ return (
             Sign Up
         </button>
         </Link>
+
+
+        <label>
+            {error}
+        </label>
 
 
         </div>
