@@ -91,7 +91,7 @@ return (
             <label>
             <h3>Password</h3>
                 <input
-                    type="text"
+                    type="password"
                     value={password}
                     onChange={e=>setPassword(e.target.value)}
                 >

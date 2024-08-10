@@ -87,7 +87,7 @@ if(click) {
             <label>
             <h3>Enter a password</h3>
                 <input
-                    type="text"
+                    type="password"
                     value={password}
                     onChange={e=>setPassword(e.target.value)}
                 >
