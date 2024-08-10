@@ -16,6 +16,10 @@ const HomePage = () => {
                     <button>Games To Make</button>
                 </Link>
 
+                <Link to= "/savedGames">
+                    <button>Saved Games</button>
+                </Link>
+
             </div>
 
     ); 
