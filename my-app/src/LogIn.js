@@ -44,32 +44,6 @@ const signIn = async (e) => {
     });
 }
 
-/*
-useEffect(() => {
-
-const signIn = async (e) => {
-    e.preventDefault();
-
-    await signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        // ...
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-    });
-}
-
-if (click) {
-    signIn(auth, email, password);
-    navigate("/home");
-}
-
-}, [click, email, password, navigate]); */
-
-
 return (
     <form>
         <div style={{textAlign: "center"}}>
@@ -123,9 +97,3 @@ return (
 };
 
 export default LogIn;
-//export const Email = email;
-//export const email;
-
-//<Link to= "/">
-//<button>Games To Make</button>
-//</Link>

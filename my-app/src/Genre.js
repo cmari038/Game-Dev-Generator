@@ -4,13 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import CSRFToken from './csrftoken';
 
 const Genre = () => {
-   const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
-   //const DjangoCookie = "http://127.0.0.1:8000/cookie/";
 
-   //const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-   //axios.defaults.headers.common['x-csrftoken'] = token;
-
- const [genreList, addGenre] = useState([]);
+const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
+const [genreList, addGenre] = useState([]);
 
  const setGenre = (genre, numBool) => {
     if(numBool === 1) {    
