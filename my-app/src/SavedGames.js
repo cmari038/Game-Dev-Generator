@@ -5,63 +5,102 @@ import { auth, db } from "./Firebase";
 const SavedGames = () => {
 
     const [gameCollection, addCollection] = useState([]);
+    const [index, getIndex] = useState(0);
 
-    const [currentGame, getCurrGame] = useState('');
-    
-    const setCurrGame = (input) => {
-        getCurrGame(input);
-    }
+    const setIndex = (val) => {
+        if(val === index + 1 && val < gameCollection.length) {
+            getIndex(val);
+            //setCurrGame(gameCollection[val]);
+        }
 
-
-/*
-    const [clickNext, changeClickNext] = useState(false);
-
-    const setClickNext = (clicked) => {
-        changeClickNext(clicked);
-    }
-
-    /*const [clickPrev, changeClickPrev] = useState(false);
-
-    const setClickPrev = () => {
-        changeClickPrev(true);
+        else if(val === index - 1 && val > 0) {
+            getIndex(val);
+            //setCurrGame(gameCollection[val]); 
+        } 
+       
     } 
 
-    const [index, setIndex] = useState(0);
-    
-    const getIndex = (val) => {
-        setIndex(val);
+
+    /*const getData = async() => {
+        const querySnapshot = await getDocs(collection(db, auth.currentUser.email));
+        querySnapshot.forEach( (doc) => {
+            const holder = doc.data();
+            addCollection([...gameCollection, holder.Game]);
+            //console.log(holder.Game);
+            });
+        //setCurrGame(gameCollection[0]);
+        //console.log(gameCollection[0])
     }
 
-    const [gameCollection, addCollection] = useState([]);
+    const UserCheck = async () => {
+        auth.onAuthStateChanged(user => {
+            if(user) {
+                //console.log(auth.currentUser.email);
+                getData();
+            }
 
-    const [currentGame, getCurrGame] = useState('');
+            else {
+                console.log("No user");
+            }
+        })
+    }
+
+    const [index, getIndex] = useState(0);
+
+    const setIndex = (val) => {
+        if(val === index + 1 && val < gameCollection.length) {
+            getIndex(val);
+            //setCurrGame(gameCollection[val]);
+        }
+
+        else if(val === index - 1 && val > 0) {
+            getIndex(val);
+            //setCurrGame(gameCollection[val]); 
+        } 
+       
+    } 
+
+
+
+   const [currentGame, getCurrGame] = useState('');
     
     const setCurrGame = (input) => {
         getCurrGame(input);
     }
-        
-    const setCollection = () => {
-            querySnapshot.forEach( (doc) => {
-            addCollection([...gameCollection, doc.data()]);
-            });
-    }
-        
-    
-    */
 
-    useEffect(() => {
+    const [index, getIndex] = useState(0);
+
+    const [click, changeClick] = useState(false);
+
+    const setClick = (boolean) => {
+        changeClick(boolean);
+    } */
+
+   useEffect(() => {
+
+       /* const setIndex = (val) => {
+            if(val === index + 1 && val < gameCollection.length) {
+                getIndex(val);
+                setCurrGame(gameCollection[val]);
+            }
+    
+            else if(val === index - 1 && val > 0) {
+                getIndex(val);
+                setCurrGame(gameCollection[val]); 
+            } 
+           
+        } */
 
         const getData = async() => {
             const querySnapshot = await getDocs(collection(db, auth.currentUser.email));
             querySnapshot.forEach( (doc) => {
                 const holder = doc.data();
                 addCollection([...gameCollection, holder.Game]);
+               // console.log("check");
                 //console.log(holder.Game);
                 });
-            setCurrGame(gameCollection[0]);
+            //setCurrGame(gameCollection[0]);
             //console.log(gameCollection[0])
-
-
         }
 
         const UserCheck = async () => {
@@ -76,16 +115,16 @@ const SavedGames = () => {
                 }
             })
         }
-
-        UserCheck();
-
-    }, [gameCollection]) 
+       
+    UserCheck();
+    
+    }, [gameCollection])  
 
     return (
-        <div>
+        <div style={{whiteSpace: "pre-wrap"}}>
             <h1>Saved Games</h1>
 
-            <p>{currentGame}</p>
+            <p>{gameCollection[index]}</p>
 
             <button>
                 Prev
