@@ -13,11 +13,7 @@ const HomePage = () => {
                 <p> This website uses Google's Gemini AI to creates new ideas for games that developers can design </p>
 
                 <Link to= "/genre">
-                    <button>Games To Make</button>
-                </Link>
-
-                <Link to= "/savedGames">
-                    <button>Saved Games</button>
+                    <button>Generate a Game</button>
                 </Link>
 
             </div>

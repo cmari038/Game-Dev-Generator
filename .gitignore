@@ -1,2 +1,5 @@
 .env
 .DS_Store
+/my-app/src/Firebase.js
+/my-app/src/LogIn.js
+/my-app/src/MakeAccount.js
