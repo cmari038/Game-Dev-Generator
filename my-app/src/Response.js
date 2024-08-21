@@ -42,7 +42,6 @@ const Response = () => {
 }, []);
 
 const saveData = async() => {
-    
     const collectionRef = collection(db, auth.currentUser.email); 
     console.log(output)
     await addDoc(collectionRef, {"Game": output});
@@ -61,14 +60,14 @@ const saveData = async() => {
                 </button>
                 </Link>
 
-                <Link to= "/home"> 
+                <Link to= "/"> 
                 <button>
                     Home
                 </button>
                 </Link>
 
                 <button onClick={saveData}>
-                   Save
+                   Download
                 </button>
 
             </p>
