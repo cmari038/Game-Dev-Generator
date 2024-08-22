@@ -5,14 +5,6 @@ import { auth, db } from "./Firebase";
 const SavedGames = () => {
 
     const [gameCollection, addCollection] = useState([]);
-   // const [index, getIndex] = useState(0);
-
-   /* const setIndex = (val) => {
-        if(val < gameCollection.length || val > -1) {
-            getIndex(val);
-            //setCurrGame(gameCollection[val]);
-        }
-    }  */
 
    useEffect(() => {
 
@@ -52,7 +44,8 @@ const SavedGames = () => {
             <h1>Saved Games</h1>
 
             <ul>
-                {gameCollection.map(game => (<li key={game.id}>{game.Game}</li>))}
+                {gameCollection.map(game => (<li key={game.id}>{game.Game}  <br></br>
+                    <br></br> </li>))}
             </ul>
             
         </div>

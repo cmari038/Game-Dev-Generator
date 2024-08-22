@@ -73,9 +73,15 @@ return (
 
             </label>
 
+            <br></br>
+            <br></br>
+
             <button type="submit" onClick={signIn} style={{textAlign: "center"}}>
                             Log in
             </button>
+
+            <br></br>
+            <br></br>
 
         <Link to="/makeAccount">
         <button>

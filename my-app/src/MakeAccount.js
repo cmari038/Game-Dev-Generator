@@ -46,26 +46,6 @@ const createAccount = async(e) => {
         // ..
     });
 }
-/*useEffect(() => {
-const createAccount = async(auth, email, password) => {
-    await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        // ...
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-    });
-} 
-
-if(click) {
-    createAccount(auth,email,password);
-} 
-
-}, [click, email, password] ); */
 
     return (
         <form>
@@ -94,6 +74,9 @@ if(click) {
                 </input>
 
             </label>
+
+            <br></br>
+            <br></br>
 
             <button type="submit" onClick={createAccount}>
                 Create Account
