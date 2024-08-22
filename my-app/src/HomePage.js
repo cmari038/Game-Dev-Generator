@@ -3,8 +3,6 @@ import React from "react";
 //import Platform from "./Platform";
 import { Link } from 'react-router-dom';
 
-//<Link to="/platform"><button>Games To Play</button></Link>
-
 const HomePage = () => {
    return ( 
          
