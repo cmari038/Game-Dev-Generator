@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "./Firebase";
 
 const LogIn = () => {
@@ -48,8 +48,6 @@ return (
     <form>
         <div style={{textAlign: "center"}}>
 
-            <h1>Log In</h1>
-
             <label>
            <h2>Email</h2>
                 <input
@@ -76,19 +74,12 @@ return (
             <br></br>
             <br></br>
 
-            <button type="submit" onClick={signIn} style={{textAlign: "center"}}>
+            <button type="submit" onClick={signIn} style={{textAlign: "center", backgroundColor: 'blue', color: 'white', width: '150px'}}>
                             Log in
             </button>
 
             <br></br>
             <br></br>
-
-        <Link to="/makeAccount">
-        <button>
-            Sign Up
-        </button>
-        </Link>
-
 
         <label>
             {error}

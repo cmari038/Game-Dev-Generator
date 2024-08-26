@@ -51,10 +51,8 @@ const createAccount = async(e) => {
         <form>
         <div style={{textAlign: "center"}}>
 
-            <h1>Make an Account</h1>
-
             <label>
-           <h2>Enter an Email</h2>
+           <h2>Email</h2>
                 <input
                     type="text"
                     value={email}
@@ -65,7 +63,7 @@ const createAccount = async(e) => {
             </label>
 
             <label>
-            <h3>Enter a password</h3>
+            <h3>Password</h3>
                 <input
                     type="password"
                     value={password}

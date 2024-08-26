@@ -3,8 +3,6 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import Genre from './Genre';
 import HomePage from './HomePage';
-import LogIn from './LogIn';
-import MakeAccount from './MakeAccount';
 import Response from './Response';
 import SavedGames from './SavedGames';
 
@@ -13,11 +11,9 @@ import SavedGames from './SavedGames';
       <div>
         <Router>
           <Routes>
-            <Route exact path="/" element={<LogIn />} />
+            <Route exact path="/" element={<HomePage />} />
             <Route path="/genre" element={<Genre />} />
             <Route path="/response" element={<Response />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/makeAccount" element={<MakeAccount />} />
             <Route path="/savedGames" element={<SavedGames />} />
           </Routes>
         </Router>
