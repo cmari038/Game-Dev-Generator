@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 //import { email } from "./LogIn";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "./Firebase";
+import Popups from "./Popup";
 
 const Response = () => {
 
@@ -14,8 +15,6 @@ const Response = () => {
     const setOutput = (text) => {
         getOutput(text);
     }
-
-    
 
    useEffect(() => {
 
@@ -41,36 +40,80 @@ const Response = () => {
 
 }, []);
 
-const saveData = async() => {
+/*const saveData = async() => {
     const collectionRef = collection(db, auth.currentUser.email); 
     console.log(output)
     await addDoc(collectionRef, {"Game": output});
+}*/
+
+const [click, setClick] = useState(false);
+
+const addClick = () => {
+    setClick(true);
 }
+
+const [error, setError] = useState('');
+
+    const addError = () => {
+        setError("Login or make an account")
+    }
+
+useEffect(()=> {
+
+    const saveData = async() => {
+        const collectionRef = collection(db, auth.currentUser.email); 
+        console.log(output)
+        await addDoc(collectionRef, {"Game": output});
+    }
+
+    auth.onAuthStateChanged(user => {
+        if(user && click) {
+        //  console.log(user.email);
+            saveData();
+        }
+
+        else if(!user && click) {
+            addError();
+        }
+
+        //console.log(user.email);
+    })
+}, [click, output])
 
     return (
 
-        <div style={{whiteSpace: "pre-wrap"}}>
-            <h1 style={{textAlign: "center"}}>Game Ideas</h1>
-            <p>
+        <div style={{whiteSpace: "pre-wrap", textAlign: "center"}}>
+            <h1 style={{textAlign: "center"}}>Game Idea</h1>
+            <p style={{textAlign: "center"}}>
                 {output}
 
-                <Link to= "/genre"> 
-                <button>
+                <br></br>
+                <br></br>
+            </p>
+
+            <Link to= "/genre"> 
+                <button style={{padding: '10px 20px'}}>
                     Select Parameters
                 </button>
-                </Link>
+            </Link>
 
-                <Link to= "/"> 
-                <button>
+            <Link to= "/"> 
+                <button style={{padding: '10px 20px'}}>
                     Home
                 </button>
-                </Link>
+            </Link>
 
-                <button onClick={saveData}>
-                   Download
-                </button>
+            <button onClick={addClick} style={{padding: '10px 20px'}}>
+                Save Game
+            </button>
 
-            </p>
+            <br></br>
+            <br></br>
+
+            <Popups/>
+
+            {error}
+
         </div>
 
     );
