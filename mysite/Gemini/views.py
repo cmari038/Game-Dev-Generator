@@ -92,12 +92,13 @@ def getGameIdea(request):
         theme = jsonData.get('Theme')
         topic = jsonData.get('Topic')
         gameIdeas = {'gameIdeas': generateGame(genreList, theme, topic)}
+        Game.objects.all().delete()
         Game.objects.create(game=gameIdeas['gameIdeas'])
         return HttpResponse('')
     if request.method == 'GET':
         game = Game.objects.first()
         output = copyString(game.game)
-        Game.objects.all().delete()
+        # Game.objects.all().delete()
         return HttpResponse(output)
 
 
