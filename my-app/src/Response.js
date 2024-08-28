@@ -82,7 +82,7 @@ useEffect(()=> {
 
     return (
 
-        <div style={{whiteSpace: "pre-wrap"}}>
+        <div style={{whiteSpace: "pre-wrap", backgroundColor: 'black', color: 'white', minHeight: '100vH'}}>
             <h1 style={{textAlign: "center"}}>Game Idea</h1>
             <p>
                 {output}
@@ -91,21 +91,25 @@ useEffect(()=> {
                 <br></br>
             </p>
 
-            <Link to= "/genre"> 
-                <button style={{padding: '10px 20px', textAlign: 'center'}}>
-                    Select Parameters
-                </button>
-            </Link>
+            <div style={{textAlign: 'center'}}>
 
-            <Link to= "/"> 
-                <button style={{padding: '10px 20px', textAlign: 'center'}}>
-                    Home
-                </button>
-            </Link>
+                <Link to= "/genre"> 
+                    <button style={{padding: '10px 20px', textAlign: 'center', marginRight: '10px'}}>
+                        Select Parameters
+                    </button>
+                </Link>
 
-            <button onClick={addClick} style={{padding: '10px 20px', textAlign: 'center'}}>
-                Save Game
-            </button>
+                <Link to= "/"> 
+                    <button style={{padding: '10px 20px', textAlign: 'center', marginRight: '10px'}}>
+                        Home
+                    </button>
+                </Link>
+
+                <button onClick={addClick} style={{padding: '10px 20px', textAlign: 'center'}}>
+                    Save Game
+                </button>
+
+            </div>
 
             <br></br>
             <br></br>

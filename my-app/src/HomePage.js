@@ -38,7 +38,7 @@ const HomePage = () => {
 
    return ( 
          
-            <div style={{textAlign: "center"}}>
+            <div style={{textAlign: "center", backgroundColor: 'black', color: 'white', minHeight: '100vH'}}>
                 <h1 style={{textAlign: "center"}}>Welcome to Game Dev Generator</h1>
                 <p> This website uses Google's Gemini AI to creates new ideas for games that developers can design </p>
 

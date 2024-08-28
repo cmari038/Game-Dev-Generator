@@ -100,7 +100,7 @@ const [genreList, addGenre] = useState([]);
 }, [navigate, click, genreList, theme, topic]);
 
    return (
-        <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center', textAlign: "center"}}>
+        <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center', textAlign: "center", backgroundColor: 'black', color: 'white', minHeight: '100vH'}}>
             <h1 style={{textAlign: "center", fontSize: '20px'}}>Choose your Gameplay Style</h1>
 
             <CSRFToken/>
