@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ClipLoader from "react-spinners/ClipLoader";
 import CSRFToken from './csrftoken';
 
 const Genre = () => {
@@ -471,6 +472,13 @@ const [genreList, addGenre] = useState([]);
                         <button onClick={setClick} style={{textAlign: "center"}}>
                             Generate a new Game Idea
                         </button>
+
+                        <br></br>
+                        <br></br>
+
+                        <ClipLoader loading={click} color={'white'}/>
+
+
                     </p>
          </div>  
     );
