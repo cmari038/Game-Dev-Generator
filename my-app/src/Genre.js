@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ClipLoader from "react-spinners/ClipLoader";
 import CSRFToken from './csrftoken';
 
 const Genre = () => {
@@ -100,8 +101,8 @@ const [genreList, addGenre] = useState([]);
 }, [navigate, click, genreList, theme, topic]);
 
    return (
-        <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center'}}>
-            <h1 style={{textAlign: "center"}}>OPTIONAL: Choose your Gameplay Style</h1>
+        <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '7px', justifyItems: 'center', textAlign: "center", backgroundColor: 'black', color: 'white', minHeight: '100vH'}}>
+            <h1 style={{textAlign: "center", fontSize: '20px'}}>Choose your Gameplay Style</h1>
 
             <CSRFToken/>
 
@@ -450,7 +451,7 @@ const [genreList, addGenre] = useState([]);
                     </label>
 
                     <label>
-                    <h2>OPTIONAL: Enter a theme(Sci-fi, Steampunk, Horror, etc):</h2>
+                    <h2 style={{fontSize: '20px'}}>Enter a Setting(Sci-fi, Steampunk, Horror, etc):</h2>
                         <input
                         type="text"
                         value={theme}
@@ -459,7 +460,7 @@ const [genreList, addGenre] = useState([]);
                     </label>
 
                     <label>
-                    <h3>OPTIONAL: Enter a topic(spies, monsters, aliens, pirates, etc):</h3>
+                    <h3 style={{fontSize: '20px'}}>Enter a theme(spies, monsters, aliens, pirates, etc):</h3>
                         <input
                         type="text"
                         value={topic}
@@ -471,6 +472,13 @@ const [genreList, addGenre] = useState([]);
                         <button onClick={setClick} style={{textAlign: "center"}}>
                             Generate a new Game Idea
                         </button>
+
+                        <br></br>
+                        <br></br>
+
+                        <ClipLoader loading={click} color={'white'}/>
+
+
                     </p>
          </div>  
     );
@@ -478,14 +486,3 @@ const [genreList, addGenre] = useState([]);
    };
 
    export default Genre;
-
-   /*
-   <Link to= "http://127.0.0.1:8000/gameIdea/">
-   <button onClick={sendData(genreList, theme, topic)}>
-       Generate a new Game Idea
-   </button>
-</Link> */
-
-//  <a href="http://127.0.0.1:8000/gameIdea/"> Generate a new Game Idea</a>
-// <Link to= "http://127.0.0.1:8000/gameIdea/">
-// </Link>

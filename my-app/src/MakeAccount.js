@@ -46,35 +46,13 @@ const createAccount = async(e) => {
         // ..
     });
 }
-/*useEffect(() => {
-const createAccount = async(auth, email, password) => {
-    await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        // ...
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-    });
-} 
-
-if(click) {
-    createAccount(auth,email,password);
-} 
-
-}, [click, email, password] ); */
 
     return (
         <form>
         <div style={{textAlign: "center"}}>
 
-            <h1>Make an Account</h1>
-
             <label>
-           <h2>Enter an Email</h2>
+           <h2>Email</h2>
                 <input
                     type="text"
                     value={email}
@@ -85,7 +63,7 @@ if(click) {
             </label>
 
             <label>
-            <h3>Enter a password</h3>
+            <h3>Password</h3>
                 <input
                     type="password"
                     value={password}
@@ -94,6 +72,9 @@ if(click) {
                 </input>
 
             </label>
+
+            <br></br>
+            <br></br>
 
             <button type="submit" onClick={createAccount}>
                 Create Account

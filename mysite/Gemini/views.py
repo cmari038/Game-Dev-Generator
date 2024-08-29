@@ -34,18 +34,18 @@ def generateGame(genreList, theme, topic):
     if len(genreList) == 0:
         if theme == '' and topic == '':
             response = model.generate_content(
-                f"Give me a unique idea for a game, including a long and detailed description of the game's genre, title, setting, lore, story, characters, levels, enemies, bosses, equipment, gameplay features, and unique mechanics.")
+                f"Give me a unique idea for a game, including a long and detailed description of the game's genre, title, setting, lore, story, levels, enemies, bosses, equipment, gameplay features, and unique mechanics.")
         elif theme != '' and topic == '':
             response = model.generate_content(
-                f"Give me a unique idea for a {theme} game, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
+                f"Give me a unique idea for a {theme} game, including a long and detailed description of the game's genre, title, setting, lore, story, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
         elif theme == '' and topic != '':
             response = model.generate_content(
-                f"Give me a unique idea for a game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
+                f"Give me a unique idea for a game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
         else:
             response = model.generate_content(
-                f"Give me a unique idea for a {theme} game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
+                f"Give me a unique idea for a {theme} game about {topic}, including a long and detailed description of the game's genre, title, setting, lore, story, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
     else:
         genreString = ''
@@ -55,20 +55,20 @@ def generateGame(genreList, theme, topic):
         if theme == '' and topic == '':
             # Query the Model
             response = model.generate_content(
-                f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
+                f"Give me a unique idea for a game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
             # print(response.text)
         elif theme != '' and topic == '':
             response = model.generate_content(
-                f"Give me a unique idea for a {theme} game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
+                f"Give me a unique idea for a {theme} game that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
         elif theme == '' and topic != '':
             response = model.generate_content(
-                f"Give me a unique idea for a game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
+                f"Give me a unique idea for a game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
         else:
             response = model.generate_content(
-                f"Give me a unique idea for a {theme} game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, characters, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
+                f"Give me a unique idea for a {theme} game about {topic} that fits each of the following genres:{genreString}, including a long and detailed description of the game's genre, title, setting, lore, story, enemies, levels, bosses, gameplay features (in how they fit the chosen genre), abilities, equipment, and unique features.")
 
     # return parser(response.text)
     return response.text
@@ -92,17 +92,13 @@ def getGameIdea(request):
         theme = jsonData.get('Theme')
         topic = jsonData.get('Topic')
         gameIdeas = {'gameIdeas': generateGame(genreList, theme, topic)}
-        # print(gameIdeas['gameIdeas'])
-        # print(genreList)
+        Game.objects.all().delete()
         Game.objects.create(game=gameIdeas['gameIdeas'])
         return HttpResponse('')
     if request.method == 'GET':
         game = Game.objects.first()
         output = copyString(game.game)
-        # game.delete()
-        # return render(request, 'response.html', gameIdeas)
-        # return HttpResponse(gameIdeas['gameIdeas'])
-        Game.objects.all().delete()
+        # Game.objects.all().delete()
         return HttpResponse(output)
 
 
