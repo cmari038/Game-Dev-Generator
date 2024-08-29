@@ -469,7 +469,7 @@ const [genreList, addGenre] = useState([]);
                     </label>
 
                     <p>
-                        <button onClick={setClick} style={{textAlign: "center"}}>
+                        <button onClick={setClick} style={{textAlign: "center", padding: '10px 20px'}}>
                             Generate a new Game Idea
                         </button>
 

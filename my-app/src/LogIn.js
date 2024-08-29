@@ -46,7 +46,7 @@ const signIn = async (e) => {
 
 return (
     <form>
-        <div style={{textAlign: "center"}}>
+        <div style={{textAlign: "center", color: 'white'}}>
 
             <label>
            <h2>Email</h2>
@@ -74,7 +74,7 @@ return (
             <br></br>
             <br></br>
 
-            <button type="submit" onClick={signIn} style={{textAlign: "center", backgroundColor: 'blue', color: 'white', width: '150px'}}>
+            <button type="submit" onClick={signIn} style={{textAlign: "center", color: 'black', width: '150px'}}>
                             Log in
             </button>
 

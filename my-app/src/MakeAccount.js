@@ -49,7 +49,7 @@ const createAccount = async(e) => {
 
     return (
         <form>
-        <div style={{textAlign: "center"}}>
+        <div style={{textAlign: "center", color: 'white'}}>
 
             <label>
            <h2>Email</h2>
@@ -76,7 +76,7 @@ const createAccount = async(e) => {
             <br></br>
             <br></br>
 
-            <button type="submit" onClick={createAccount}>
+            <button type="submit" onClick={createAccount} style ={{width: '150px'}}>
                 Create Account
             </button>
             
