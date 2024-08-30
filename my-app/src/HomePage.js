@@ -48,6 +48,7 @@ const HomePage = () => {
 
                 <br></br>
                 <br></br>
+                <br></br>
 
                 <button onClick={addClick} style={{padding: '10px 20px'}}>Saved Games</button>
                

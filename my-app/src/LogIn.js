@@ -32,7 +32,7 @@ const signIn = async (e) => {
         // Signed in 
         const user = userCredential.user;
         console.log(user);
-        navigate("/home");
+        navigate("/");
         // ...
     })
     .catch((error) => {
