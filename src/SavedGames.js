@@ -42,7 +42,7 @@ const SavedGames = () => {
 
     return (
         <div style={{whiteSpace: "pre-wrap", backgroundColor: 'black', color: 'white', minHeight: '100vH'}}>
-            <h1>Saved Games</h1>
+            <h1 style={{textAlign: 'center'}}>Saved Games</h1>
 
             <ul>
                 {gameCollection.map(game => (<li key={game.id}>{game.Game}  <br></br> <hr></hr>
