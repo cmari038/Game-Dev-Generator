@@ -24,11 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    'game-dev-generator.web.app',
+    'game-dev-generator.firebaseapp.com'
 ]
 
 
@@ -53,6 +55,9 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://192.168.1.162:3000',
+    'https://game-dev-generator.web.app',
+    'https://game-dev-generator.firebaseapp.com',
+
 ]
 
 CORS_ALLOW_METHODS = [
@@ -69,6 +74,8 @@ CORS_ALLOW_HEADERS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
+    'https://game-dev-generator.web.app',
+    'https://game-dev-generator.firebaseapp.com',
 ]
 
 CSRF_COOKIE_HTTPONLY = False
@@ -76,12 +83,16 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_DOMAIN = 'http://localhost:3000'
+# SESSION_COOKIE_DOMAIN = 'http://localhost:3000'
+SESSION_COOKIE_DOMAIN = 'https://game-dev-generator.web.app'
 SESSION_COOKIE_HTTPONLY = False
 CSRF_USE_SESSIONS = False
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'https://game-dev-generator.web.app',
+    'https://game-dev-generator.firebaseapp.com',
+
 ]
 
 MIDDLEWARE = [
