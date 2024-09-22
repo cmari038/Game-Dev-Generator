@@ -33,6 +33,9 @@ ALLOWED_HOSTS = [
     'game-dev-generator.firebaseapp.com'
 ]
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Application definition
 
