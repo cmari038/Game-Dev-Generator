@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'game-dev-generator.web.app',
     'game-dev-generator.firebaseapp.com',
-    os.getenv("HEROKU")
+    os.environ.get('HEROKU_URL')
 ]
 
 STATIC_URL = '/static/'
