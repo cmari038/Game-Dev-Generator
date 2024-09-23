@@ -6,7 +6,8 @@ import CSRFToken from './csrftoken';
 
 const Genre = () => {
 
-const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
+//const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
+//const backendURL_post = process.env.REACT_APP_BACKEND_URL;
 const [genreList, addGenre] = useState([]);
 
  const setGenre = (genre, numBool) => {
@@ -74,6 +75,7 @@ const [genreList, addGenre] = useState([]);
 
         //addCSRF(document.getElementById('csrf').value);
         const csrftoken = document.getElementById('csrf').value;
+        const backendURL_post = process.env.REACT_APP_BACKEND_URL;
 
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
         axios.defaults.xsrfCookieName = 'csrftoken';
