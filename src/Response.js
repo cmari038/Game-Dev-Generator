@@ -8,7 +8,9 @@ import Popups from "./Popup";
 
 const Response = () => {
 
-    const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
+    //const backendURL_post = "http://127.0.0.1:8000/gameIdea/";
+    //const backendURL_post = process.env.REACT_APP_BACKEND_URL;
+
 
     const [output, getOutput] = useState('');
 
@@ -19,6 +21,8 @@ const Response = () => {
    useEffect(() => {
 
     const games = async () => { 
+
+        const backendURL_post = process.env.REACT_APP_BACKEND_URL;
 
         //axios.defaults.xsrfCookieName = 'csrftoken';
         //axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"; 
