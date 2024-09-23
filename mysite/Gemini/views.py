@@ -18,7 +18,7 @@ from .models import Game
 
 def generateGame(genreList, theme, topic):
     # Using `GOOGLE_API_KEY` environment variable.
-    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+    GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
     genai.configure(api_key=GOOGLE_API_KEY)
 
     """# Checking for all available models with generateContent feature
